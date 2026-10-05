@@ -28,6 +28,8 @@ services:
       DB_DATABASE: ominimo_blog
       DB_USERNAME: root
       DB_PASSWORD: root
+      APP_ENV: local
+      APP_DEBUG: "true"
     ports:
       - "8000:8000"
     depends_on:
