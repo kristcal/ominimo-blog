@@ -18,6 +18,9 @@ return Application::configure(basePath: dirname(__DIR__))
         ]);
 
         $middleware->alias([
+            'auth.api' => \App\Http\Middleware\EnsureUserIsAuthenticated::class,
+        ]);
+        $middleware->alias([
             'verified' => \App\Http\Middleware\EnsureEmailIsVerified::class,
         ]);
 
