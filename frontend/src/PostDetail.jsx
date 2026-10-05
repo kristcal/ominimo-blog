@@ -32,14 +32,16 @@ export default function PostDetail({ user }) {
 
   if (!post) return <p>Loading...</p>;
 
+  const isAdmin = user?.role === 'admin';
   const isPostOwner = user?.id === post.user_id;
+  const canManagePost = isPostOwner || isAdmin;
 
   return (
     <div>
       <h1>{post.title}</h1>
       <p>by {post.user?.name}</p>
       <p>{post.content}</p>
-      {isPostOwner && (
+      {canManagePost && (
         <>
           <Link to={`/posts/${id}/edit`}>Edit</Link>
           <button onClick={deletePost}>Delete</button>
@@ -50,7 +52,7 @@ export default function PostDetail({ user }) {
       {post.comments.map((c) => (
         <div key={c.id}>
           <b>{c.user?.name ?? 'Guest'}:</b> {c.comment}
-          {user && (user.id === c.user_id || isPostOwner) && (
+          {user && (user.id === c.user_id || canManagePost) && (
             <button onClick={() => deleteComment(c.id)}>Delete</button>
           )}
         </div>

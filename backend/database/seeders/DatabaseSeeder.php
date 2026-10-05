@@ -19,5 +19,14 @@ class DatabaseSeeder extends Seeder
                 Comment::factory(2)->create(['post_id' => $post->id]);
             });
         });
+
+        $admin = User::factory()->create([
+            'name' => 'Admin',
+            'email' => 'admin@example.com',
+        ]);
+        $admin->role = 'admin';
+        $admin->save();
+
     }
+
 }
